@@ -1,0 +1,1 @@
+# Generator_sw_character
