@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JQuery Generator Random Character</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200&family=Pacifico&family=Poppins&display=swap" rel="stylesheet">
+    <style>
+        h1{
+            text-align: center;
+            text-decoration: underline;
+            font-family: sans-serif;
+        }
+        button{
+            display: block;
+            margin: auto;
+        }
+        img{
+            width: 200px;
+            height: auto;
+            box-shadow: 10px 10px 5px #000; 
+            display: block;
+            margin:auto;
+        }
+
+        *{
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+        }
+        html, body{
+            height: 100%;
+        }
+        body{
+            font-family: 'Poppins', sans-serif;
+            font-weight: 400;
+        }
+        .container{
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .buttons{
+            display: flex;
+            flex-direction: column;
+        }
+        .btn{
+            text-decoration: none;
+            padding: 20px 50px;
+            font-size: 1.25rem;
+            position: relative;
+            margin: 32px;
+        }
+
+        /* Button 1 */
+        .btn-1{
+            background: #000;
+            color: #fff;
+            border-radius: 30px;
+            transition: transform 0.3s ease;
+        }
+        .btn-1::after, .btn-1::before {
+            content: "";
+            position:absolute;
+            opacity: 0.3;
+            background: #000;
+            border-radius: inherit;
+            width: 100%;
+            height: 100%;
+            left: 0;
+            bottom: 0;
+            z-index: -1;
+            transition: transform 0.3s ease;
+        }
+        .btn-1:hover{
+            transform: translate(-12px, -12px);
+        }
+        .btn-1::after{
+            transform: translate(6px, 6px);
+        }
+        .btn-1::before{
+            transform: translate(12px, 12px);
+        }
+/*     Button 2 */
+
+
+        .btn-2{
+            color:#000;
+        }
+        .btn-2::after, .btn-2.btn-2::before{
+            border: 3px solid #000;
+            content: "";
+            position: absolute;
+            width: calc(100% - 6px);
+            height: calc(100% - 6px);
+            left: 0;
+            bottom: 0;
+            z-index: -1;
+            transition: transform 0.3s ease;
+        }
+        .btn-2:hover::after{
+            transform: translate(-5px, -5px);
+        }
+        .btn-2:hover::before{
+            transform: translate(5px, 5px);
+        }
+/* Button 3 */
+
+        .btn-3{
+            overflow: hidden;
+            color: #fff;
+            border-radius: 30px;
+            box-shadow: 0 0 0 0 rgba(143, 64, 248, 0.5), 0 0 0 0 rgba(39, 200, 255, 0.5);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+        }
+        .btn-3::after{
+            content: "";
+            width: 400px;
+            height: 400px;
+            position: absolute;
+            top: -50px;
+            left: -100px;
+            background-color: #ff3cac;
+            background-image: linear-gradient(
+                225deg, 
+                #27d86c 0%, 
+                #26caf8 50%, 
+                #c625d0 100%
+                );
+            z-index: -1;
+            transition: transform 0.5s ease;
+        }
+        .btn-3.btn-3:hover{
+            transform: translate(0, -6px);
+            box-shadow: 10px -10px 25px 0 rgba(143, 64, 248, 0.5), -10px 10px 25px 0 rgba(39, 200, 255, 0.5);
+        }
+        .btn-3:hover::after{
+            transform: rotate(180deg);
+        }
+
+    </style>
+</head>
+<body>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    
+        <div class="container">
+            <div class="buttons">
+                
+                <a href="#" class="btn btn-1">Click Me</a>
+                <a href="#" class="btn btn-2">Click Me</a>
+                <a href="#" class="btn btn-3">Click Me</a>
+                <button class="btn btn-1">Generate Character</button>
+            </div>
+        </div> 
+
+
+
+    
+    <h1 class="name"></h1>
+    <img src="" class="character-img" alt="">
+    <script>
+        $(document).ready(function() {
+            $("button").on("click" , function() {
+
+            
+                const randomNumber = Math.ceil (Math.random() * 88)
+                $.get(`https://rawcdn.githack.com/akabab/starwars-api/0.2.1/api/id/${randomNumber}.json`, function(data){
+                    
+                    //console.log(data['name'])
+                    $("h1.name").text(data['name'])
+                    $(".character-img").attr("src", data['image'])
+                })
+            })
+    })
+    </script>
+</body>
+</html>
+
+
+
+<!-- $(document).ready(function(){
+    $("li").each(function(index , element) {
+        const originalText = $(element).text()
+        $(element).text(`${index * 10}. ${originalText}`)
+        if(index===2){
+            $(element)
+                .css("background-color", "black")
+                .css("color", "white")
+        }
+    })
+}) -->
